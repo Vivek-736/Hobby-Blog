@@ -51,9 +51,9 @@ const Navbar = () => {
             <ModeToggle />
             <Sheet>
               <SheetTrigger aria-label="Open menu">
-                <Menu className="h-6 w-6" />
+                <Menu className="h-6 w-6 cursor-pointer" />
               </SheetTrigger>
-              <SheetContent side="right" className="w-[300px] bg-white">
+              <SheetContent side="right" className="w-[300px] bg-white dark:bg-slate-800">
                 <SheetHeader>
                   <SheetTitle className="text-2xl font-bold">
                     VivekBlog
