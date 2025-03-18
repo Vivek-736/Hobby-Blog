@@ -10,9 +10,9 @@ export default function Page() {
       <p className="text-lg text-gray-500 mt-2">
         It looks like the page you&apos;re looking for doesn&apos;t exist.
       </p>
-      <div className="mt-6">
+      <div className="mt-6 hover:bg-gray-900">
         <Link href="/" >
-          <Button className="cursor-pointer" variant={"outline"}>Go back home 🏠</Button>
+          <Button className="cursor-pointer text-black" variant={"outline"}>Go back home 🏠</Button>
         </Link>
       </div>
     </div>
