@@ -37,11 +37,6 @@ const Navbar = () => {
                 Blog
               </p>
             </Link>
-            <Link href="/contact">
-              <p className="transition duration-300 hover:text-gray-600">
-                Contact
-              </p>
-            </Link>
             <div>
               <ModeToggle />
             </div>
@@ -69,12 +64,6 @@ const Navbar = () => {
                     </Link>
                     <Link href="/blog" className="text-lg hover:text-gray-600">
                       Blog
-                    </Link>
-                    <Link
-                      href="/contact"
-                      className="text-lg hover:text-gray-600"
-                    >
-                      Contact
                     </Link>
                   </nav>
                 </div>
