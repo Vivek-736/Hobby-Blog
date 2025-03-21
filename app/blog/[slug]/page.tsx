@@ -1,11 +1,23 @@
-import React from 'react'
+import React from "react";
 
-const page = () => {
+const BlogPostSlugPage = ({ params }) => {
+  const blog = {
+    author: "Author name",
+    description: "Blog Description",
+    date: "2025-10-01",
+    content: "<p> Your <strong>HTML</strong> content here </p>",
+  };
+
   return (
-    <div>
-        <h1>Blog Post</h1>
-    </div>
-  )
-}
+    <>
+      <div className="max-w-5xl mx-auto">
+        <h1>{blog.author}</h1>
+        <p>{blog.description}</p>
+        <p>{blog.date}</p>
+        <div dangerouslySetInnerHTML={{ __html: blog.content }} className="prose" ></div>
+      </div>
+    </>
+  );
+};
 
-export default page
+export default BlogPostSlugPage;

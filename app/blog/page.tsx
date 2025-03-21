@@ -5,14 +5,14 @@ const blogs = [
   {
     title: "Mastering React",
     description: "Learn the best practices and hidden gems of React to build efficient applications.",
-    slug: "mastering-react-tips-tricks",
+    slug: "mastering-react",
     author: "Vivek",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse4.mm.bing.net%2Fth%3Fid%3DOIP.BAwJnB3maWaRiZsXTXTmcwHaEK%26pid%3DApi&f=1&ipt=418bd4819f3a4f94b7bc651c85535908fa2bd7e7890eed56be3a14cc73b6ea5a&ipo=images",
   },
   {
     title: "Understanding Next.js",
     description: "Explore how server-side rendering in Next.js can enhance performance and SEO.",
-    slug: "understanding-nextjs-ssr",
+    slug: "understanding-nextjs",
     author: "Ram",
     image: "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse1.mm.bing.net%2Fth%3Fid%3DOIP.PJ87QhnDB4G5r6GynPSEVwHaEO%26pid%3DApi&f=1&ipt=8905e3e566af491d26760e2f07379d94fc8639ccd9be76182bb0cafc5265a428&ipo=images",
   },
