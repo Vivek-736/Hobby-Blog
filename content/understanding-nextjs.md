@@ -32,8 +32,102 @@ npx create-next-app my-nextjs-app
 
 This will set up a new Next.js project with all the necessary dependencies and configuration.
 
+## File-Based Routing
+
+Next.js uses a file-based routing system, which means that the structure of your files in the `app` directory determines the routes of your application. For example, if you create a file called `about/page.jsx` in the `app` directory, it will be accessible at `/about`.
+
+### Example
+
+Create a new file `app/about/page.jsx`:
+
+```jsx
+// app/about/page.jsx
+import React from 'react';
+
+const About = () => {
+    return (
+        <div>
+            <h1>About Us</h1>
+            <p>This is the about page.</p>
+        </div>
+    );
+};
+
+export default About;
+```
+
+Now, navigating to `/about` in your browser will display the content of the `About` component.
+
+## Dynamic Routing
+
+Next.js also supports dynamic routing, which allows you to create routes with dynamic parameters. This is useful for pages that display content based on a specific identifier, such as a blog post or user profile.
+
+### Example
+
+Create a new file `[id]/page.jsx` in the `app` directory:
+
+```jsx
+// app/[id]/page.jsx
+import { useRouter } from 'next/router';
+
+const Post = () => {
+    const router = useRouter();
+    const { id } = router.query;
+
+    return (
+        <div>
+            <h1>Post {id}</h1>
+            <p>This is the content of post {id}.</p>
+        </div>
+    );
+};
+
+export default Post;
+```
+
+Now, navigating to `/1`, `/2`, etc., will display the content of the `Post` component with the corresponding `id`.
+
+## API Routes
+
+Next.js allows you to create API routes to handle server-side logic and data fetching. These routes are created in the `app/api` directory.
+
+### Example
+
+Create a new file `hello/route.ts` in the `app/api` directory:
+
+```javascript
+// app/api/hello/route.js
+export default function handler(req, res) {
+    res.status(200).json({ message: 'Hello, world!' });
+}
+```
+
+Now, navigating to `/api/hello` in your browser will return a JSON response with the message "Hello, world!".
+
+## App Router
+
+Next.js provides an `App` component that allows you to customize the default behavior of your application. This component can be used to add global styles, layout components, and more.
+
+### Example
+
+In Pages router, we follow the below process
+Create a new file `_app.js` in the `pages` directory:
+
+```jsx
+// pages/_app.js
+import '../styles/globals.css';
+
+function MyApp({ Component, pageProps }) {
+    return <Component {...pageProps} />;
+}
+
+export default MyApp;
+```
+
+In this example, the `MyApp` component wraps all the pages in your application, allowing you to add global styles and other customizations.
+
 ## Conclusion
 
-Next.js is a versatile framework that offers a range of features to help you build high-performance, SEO-friendly web applications. Whether you're building a simple blog or a complex web application, Next.js provides the tools you need to succeed.
+Next.js offers a powerful and flexible framework for building server-side rendered React applications. With features like file-based routing, dynamic routing, API routes, and the App component, you can easily create high-performance, SEO-friendly web applications.
 
 Happy coding!

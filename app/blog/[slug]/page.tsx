@@ -2,16 +2,43 @@ import React from "react";
 import fs from "fs";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
+import rehypeDocument from "rehype-document";
+import rehypeFormat from "rehype-format";
+import rehypeStringify from "rehype-stringify";
+import remarkParse from "remark-parse";
+import remarkRehype from "remark-rehype";
+import { unified } from "unified";
+import rehypePrettyCode from "rehype-pretty-code";
+import { transformerCopyButton } from '@rehype-pretty/transformers'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const BlogPostSlugPage = ({ params }: any) => {
+const BlogPostSlugPage = async ({ params }: any) => {
   const filepath = `content/${params.slug}.md`;
-  if(!fs.existsSync(filepath)) {
+  if (!fs.existsSync(filepath)) {
     notFound();
     return;
   }
+
   const fileContent = fs.readFileSync(filepath, "utf-8");
   const { data: blog, content } = matter(fileContent);
+
+  const processor = await unified()
+    .use(remarkParse)
+    .use(remarkRehype)
+    .use(rehypePrettyCode, {
+      theme: "github-dark",
+      transformers: [
+        transformerCopyButton({
+          visibility: 'always',
+          feedbackDuration: 3_000,
+        }),
+      ],
+    })
+    .use(rehypeDocument, { title: "👋🌍" })
+    .use(rehypeFormat)
+    .use(rehypeStringify);
+
+  const htmlContent = (await processor.process(content)).toString();
 
   return (
     <>
@@ -30,8 +57,8 @@ const BlogPostSlugPage = ({ params }: any) => {
         </div>
 
         <div
-          dangerouslySetInnerHTML={{ __html: content }}
-          className="max-w-none"
+          dangerouslySetInnerHTML={{ __html: htmlContent }}
+          className="max-w-none prose md:prose-lg lg:prose-xl dark:text-white dark:prose-headings:text-indigo-300 dark:prose-a:text-indigo-50 dark:prose-li:text-indigo-50 dark:prose-strong:text-indigo-50 dark:prose-em:text-indigo-50 dark:prose-abbr:text-indigo-50 dark:prose-mark:text-indigo-50 dark:prose-del:text-indigo-50 dark:prose-sup:text-indigo-50 dark:prose-sub:text-indigo-50 dark:prose-text:text-indigo-50 dark:prose-link:text-indigo-50 dark:prose-list:text-indigo-50 dark:prose-list-item:text-indigo-50 dark:prose-ol:text-indigo-50 dark:prose-ul:text-indigo-50 dark:prose-paragraph:text-indigo-50 dark:prose-heading:text-indigo-50 dark:prose-blockquote:text-indigo-50 dark:prose-hr:text-indigo-50 dark:prose-img:text-indigo-50 dark:prose-table:text-indigo-50 dark:prose-th:text-indigo-50 dark:prose-td:text-indigo-50 dark:prose-pre:text-indigo-50 dark:prose-code:text-indigo-50 dark:prose-kbd:text-indigo-50 dark:prose-abbr:text-indigo-50 dark:prose-mark:text-indigo-50 dark:prose-del:text-indigo-50 dark:prose-sup:text-indigo-50 dark:prose-sub:text-indigo-50 dark:prose-text:text-indigo-50 dark:prose-link:text-indigo-50 dark:prose-list:text-indigo-50 dark:prose-list-item:text-indigo-"
         ></div>
       </div>
     </>

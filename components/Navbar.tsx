@@ -1,4 +1,5 @@
-import React from "react";
+"use client";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { Menu } from "lucide-react";
 import {
@@ -9,10 +10,38 @@ import {
   SheetTrigger,
 } from "@/components/ui/sheet";
 import { ModeToggle } from "./mode-toggle";
+import LoadingBar from "react-top-loading-bar";
+import { usePathname } from "next/navigation";
 
 const Navbar = () => {
+  const [progress, setProgress] = useState(0);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setProgress(30);
+
+    setTimeout(() => {
+      setProgress(70);
+    }, 100);
+
+    setTimeout(() => {
+      setProgress(100);
+    }, 800);
+  }, [pathname]);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setProgress(0);
+    }, 900);
+  }, []);
+
   return (
     <nav className="shadow-lg dark:shadow-md bg-background/50 sticky top-0 backdrop-blur-2xl dark:shadow-white">
+      <LoadingBar
+        color="#f11946"
+        progress={progress}
+        onLoaderFinished={() => setProgress(0)}
+      />
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center py-4">
           <div className="text-2xl font-bold transition duration-300">

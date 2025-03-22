@@ -1,7 +1,8 @@
 'use client';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import Typed from 'typed.js';
 
 const fadeInUp = {
   hidden: { opacity: 0, y: 50 },
@@ -9,7 +10,38 @@ const fadeInUp = {
 };
 
 export default function Home() {
+  const e1 = useRef(null);
   const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    if (e1.current) {
+      const typed = new Typed(e1.current, {
+        strings : [
+          "Building modern UIs with React and Next.js",
+          "Styling efficiently using Tailwind CSS and ShadCN UI",
+          "Developing scalable backends with Node.js and Express.js",
+          "Managing databases with MongoDB and SQL",
+          "Using Prisma ORM and Drizzle ORM for database interactions",
+          "Deploying full-stack apps seamlessly on Vercel",
+          "Enhancing type safety with TypeScript",
+          "Implementing authentication and session management in NextAuth and Clerk",
+          "Writing clean, maintainable code with SOLID principles",
+          "Enhancing backend security with JWT and OAuth",
+          "Building real-time features with WebSockets and Pusher",
+          "Optimizing queries and indexing in PostgreSQL",
+          "Creating seamless UI/UX experiences using Figma at times",
+          "Managing state effectively with Zustand and Redux Toolkit",
+          "Building and testing APIs with Postman and fetching the responses in NextJS",
+          "Web development"
+        ],
+        typeSpeed: 100,
+      });
+
+      return () => {
+        typed.destroy();
+      };
+    }
+  }, []);
 
   useEffect(() => {
     setIsMounted(true);
@@ -34,14 +66,9 @@ export default function Home() {
         className="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between gap-8 pb-8 border-b border-gray-300 dark:border-gray-700"
       >
         <div className="flex-1">
-          <p className="text-lg font-bold leading-relaxed">
-            Hey there! I&apos;m Vivek, a developer. I love using:
+          <p className="text-4xl font-bold leading-relaxed">
+            Hey there! I&apos;m Vivek, a developer and I like <span ref={e1} className="text-indigo-400 dark:text-indigo-300"></span>
           </p>
-          <ul className="list-disc list-inside mt-4 text-left space-y-2">
-            <li><strong>Frontend:</strong> React, Next.js, Tailwind CSS, TypeScript</li>
-            <li><strong>Backend:</strong> Node.js, Express.js, Prisma, MongoDB</li>
-            <li><strong>Other Tools:</strong> Git, GitHub, Figma, Cloudinary, NextAuth</li>
-          </ul>
         </div>
         <div className="flex-1 flex items-center justify-center">
           <Image
